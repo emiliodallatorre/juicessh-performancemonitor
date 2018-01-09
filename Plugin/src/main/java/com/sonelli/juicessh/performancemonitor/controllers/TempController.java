@@ -8,6 +8,7 @@ import com.sonelli.juicessh.performancemonitor.R;
 import com.sonelli.juicessh.pluginlibrary.exceptions.ServiceNotConnectedException;
 import com.sonelli.juicessh.pluginlibrary.listeners.OnSessionExecuteListener;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +50,10 @@ public class TempController extends BaseController {
                         public void onOutputLine(String line) {
                             Matcher tempMatcher = tempPattern.matcher(line);
                             if(tempMatcher.find()){
-                                setText(tempMatcher.group(0));
+                                int tempInt = Integer.parseInt(tempMatcher.group(0));
+                                DecimalFormat decimalFormat = new DecimalFormat("##,###");
+                                String temp = decimalFormat.format(tempInt);
+                                setText(temp + "° C");
                             }
                         }
 

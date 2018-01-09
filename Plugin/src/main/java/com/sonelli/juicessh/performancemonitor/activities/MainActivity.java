@@ -37,6 +37,7 @@ import com.sonelli.juicessh.pluginlibrary.exceptions.ServiceNotConnectedExceptio
 import com.sonelli.juicessh.pluginlibrary.listeners.OnClientStartedListener;
 import com.sonelli.juicessh.pluginlibrary.listeners.OnSessionFinishedListener;
 import com.sonelli.juicessh.pluginlibrary.listeners.OnSessionStartedListener;
+import com.sonelli.juicessh.performancemonitor.controllers.TempController;
 
 import java.util.UUID;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
     private BaseController cpuUsageController;
     private BaseController diskUsageController;
     private BaseController networkUsageController;
+    private BaseController tempController;
 
     // Text displays
     private AutoResizeTextView loadAverageTextView;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
     private AutoResizeTextView cpuUsageTextView;
     private AutoResizeTextView networkUsageTextView;
     private AutoResizeTextView diskUsageTextView;
+    private AutoResizeTextView tempTextView;
 
     // State
     private volatile int sessionId;
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
         this.cpuUsageTextView = (AutoResizeTextView) findViewById(R.id.cpu_usage);
         this.networkUsageTextView = (AutoResizeTextView) findViewById(R.id.network_usage);
         this.diskUsageTextView = (AutoResizeTextView) findViewById(R.id.disk_usage);
+        this.tempTextView = (AutoResizeTextView) findViewById(R.id.temp);
 
         this.connectButton = (Button) findViewById(R.id.connect_button);
         Drawable drawable = getDrawable(R.drawable.login);
@@ -308,6 +312,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
                 .setTextview(networkUsageTextView)
                 .start();
 
+        this.tempController = new TempController(this)
+                .setSessionId(sessionId)
+                .setSessionKey(sessionKey)
+                .setPluginClient(client)
+                .setTextview(tempTextView)
+                .start();
     }
 
     @Override

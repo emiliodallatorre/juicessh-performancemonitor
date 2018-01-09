@@ -14,6 +14,7 @@
     <string name="about">About</string>
     <string name="error">Error</string>
     <string name="cpu_usage">CPU Usage</string>
+    <string name="temp">CPU Temp</string>
     <string name="free_memory">Free RAM</string>
     <string name="network">Network</string>
     <string name="disk">Disk Usage</string>
